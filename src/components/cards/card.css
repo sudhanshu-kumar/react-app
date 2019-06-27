@@ -1,0 +1,28 @@
+.card {
+  margin-bottom: 3.5em;
+  -webkit-box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.75);
+}
+
+.card-body {
+  margin: 0 1em;
+}
+
+.card-img-top {
+  object-fit: contain;
+  width: 100%;
+}
+
+.card-title {
+  margin-bottom: 0;
+}
+
+.card-sub-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.likes {
+  text-align: right;
+}

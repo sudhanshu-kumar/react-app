@@ -1,0 +1,9 @@
+.foot {
+  position: fixed;
+  width: 95%;
+  height: 3em;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+}
