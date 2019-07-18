@@ -9,9 +9,11 @@ const Home = ({ posts }) => {
       <div className="header">
         <h2>Home</h2>
       </div>
+      <div className="posts">
       {posts.map((post, index) => {
         return <Card key={index} post={post} />;
       })}
+      </div>
     </div>
   );
 };

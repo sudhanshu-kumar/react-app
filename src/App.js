@@ -34,7 +34,7 @@ class App extends Component {
             />
             <Route path="/add" component={Add} exact />
             <Route path="/" component={Footer} />
-            <Route path="/detail/:id" component={Detail} />
+            <Route path="/detail/:id" component={Detail} exact/>
           </div>
         </BrowserRouter>
       </div>

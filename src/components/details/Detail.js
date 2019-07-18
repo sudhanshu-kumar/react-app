@@ -5,7 +5,7 @@ import { loadPartialConfig } from "@babel/core";
 
 class Detail extends Component {
   state = {
-    post: {}
+    post: null
   };
 
   componentDidMount() {
@@ -23,7 +23,7 @@ class Detail extends Component {
   }
   render() {
     const { post } = this.state;
-    if (post !== {}) {
+    if (post !== null) {
       const date = new Date(post.created_at).getDate();
       const month = new Date(post.created_at).toLocaleString("default", {
         month: "short"
