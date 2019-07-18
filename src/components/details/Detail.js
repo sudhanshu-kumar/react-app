@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import "./Detail.css";
 import "../cards/card.css";
-import { loadPartialConfig } from "@babel/core";
 
 class Detail extends Component {
   state = {
@@ -30,25 +31,34 @@ class Detail extends Component {
       });
       const year = new Date(post.created_at).getFullYear();
       return (
-        <div className="card">
-          <img className="card-img-top" src={post.image} alt="no-image" />
-          <div className="card-body">
-            <h3 className="card-title">{post.title}</h3>
-            <div className="card-sub-title">
-              <h5>
-                {post.tags.map((tag, index) => {
-                  return <span key={index}>{tag} </span>;
-                })}
-              </h5>
-              <h5 className="date">
-                {date} {month} {year}
-              </h5>
-            </div>
-            <p className="card-text">{post.description}</p>
-            <hr />
-            <div className="likes">
-              <i className="material-icons">favorite</i>{" "}
-              <span>{post.likes}</span>
+        <div>
+          <div className="detail-head">
+            <Link to="/">
+              <i className="material-icons">arrow_back</i>
+            </Link>
+            <h2>Detail</h2>
+            <div />
+          </div>
+          <div className="card">
+            <img className="card-img-top" src={post.image} alt="no-pic" />
+            <div className="card-body">
+              <h3 className="card-title">{post.title}</h3>
+              <div className="card-sub-title">
+                <h5>
+                  {post.tags.map((tag, index) => {
+                    return <span key={index}>{tag} </span>;
+                  })}
+                </h5>
+                <h5 className="date">
+                  {date} {month} {year}
+                </h5>
+              </div>
+              <p className="card-text">{post.description}</p>
+              <hr />
+              <div className="likes">
+                <i className="material-icons">favorite</i>{" "}
+                <span>{post.likes}</span>
+              </div>
             </div>
           </div>
         </div>

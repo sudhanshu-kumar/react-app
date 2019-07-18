@@ -29,6 +29,7 @@ class Add extends Component {
       .post("http://test.peppersquare.com/api/v1/article", post)
       .then(res => {
         console.log(res.data, "post");
+        alert("Published Success");
       })
       .catch(err => console.log(err));
   };

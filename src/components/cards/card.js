@@ -11,7 +11,7 @@ const Card = ({ post }) => {
   return (
     <Link to={`/detail/${post.id}`} className="link">
       <div className="card">
-        <img className="card-img-top" src={post.image} alt="no-image" />
+        <img className="card-img-top" src={post.image} alt="no-pic" />
         <div className="card-body">
           <h3 className="card-title">{post.title}</h3>
           <div className="card-sub-title">
