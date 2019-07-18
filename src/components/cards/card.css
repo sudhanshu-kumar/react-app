@@ -1,5 +1,11 @@
+.link {
+  text-decoration: none;
+  color: black;
+}
+
 .card {
-  margin-bottom: 3.5em;
+  margin: 4.4em auto 3.5em auto;
+  max-width: 40em;
   -webkit-box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.75);
@@ -24,5 +30,12 @@
 }
 
 .likes {
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-content: center;
+  padding-bottom: 0.4em;
+}
+
+.date {
+  color: lightgray;
 }
