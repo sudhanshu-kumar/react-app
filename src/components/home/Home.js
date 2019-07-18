@@ -3,14 +3,14 @@ import "./Home.css";
 
 import Card from "../cards/card";
 
-const Home = ({ posts }) => {
+const Home = (props) => {
   return (
     <div>
       <div className="header">
         <h2>Home</h2>
       </div>
       <div className="posts">
-      {posts.map((post, index) => {
+      {props.posts.map((post, index) => {
         return <Card key={index} post={post} />;
       })}
       </div>

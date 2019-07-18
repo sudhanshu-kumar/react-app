@@ -3,6 +3,7 @@ import "./App.css";
 import axios from "axios";
 import { BrowserRouter, Route } from "react-router-dom";
 import Home from "./components/home/Home";
+import Popular from "./components/popular/Popular";
 import Add from "./components/add/AddForm";
 import Detail from "./components/details/Detail";
 import Footer from "./components/footer/footer";
@@ -32,9 +33,14 @@ class App extends Component {
               component={() => <Home posts={this.state.posts} />}
               exact
             />
+            <Route
+              path="/popular"
+              component={() => <Popular posts={this.state.posts} exact />}
+              exact
+            />
             <Route path="/add" component={Add} exact />
             <Route path="/" component={Footer} />
-            <Route path="/detail/:id" component={Detail} exact/>
+            <Route path="/detail/:id" component={Detail} exact />
           </div>
         </BrowserRouter>
       </div>
