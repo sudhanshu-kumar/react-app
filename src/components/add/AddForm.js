@@ -29,6 +29,13 @@ class Add extends Component {
       .post("http://test.peppersquare.com/api/v1/article", post)
       .then(res => {
         console.log(res.data, "post");
+        this.setState({
+          title: "",
+          description: "",
+          tags: "",
+          author: "",
+          image: ""
+        });
         alert("Published Success");
       })
       .catch(err => console.log(err));
@@ -46,29 +53,34 @@ class Add extends Component {
             name="title"
             placeholder="Title"
             onChange={this.onChangeText}
+            value={this.state.title}
           />
           <textarea
             name="description"
             placeholder="description"
             onChange={this.onChangeText}
+            value={this.state.description}
           />
           <input
             type="text"
             name="tags"
             placeholder="Category / Tags"
             onChange={this.onChangeText}
+            value={this.state.tags}
           />
           <input
             type="text"
             name="author"
             placeholder="Author"
             onChange={this.onChangeText}
+            value={this.state.author}
           />
           <input
             type="text"
             name="image"
             placeholder="Image URL Only"
             onChange={this.onChangeText}
+            value={this.state.image}
           />
           <input type="submit" value="PUBLISH" />
         </form>
