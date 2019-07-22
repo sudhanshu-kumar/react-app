@@ -2,7 +2,7 @@ import { combineForms } from "react-redux-form";
 
 export const formData = combineForms(
   {
-    postBlogs: {
+    postBlog: {
       title: "",
       description: "",
       tags: "",
