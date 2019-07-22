@@ -1,0 +1,3 @@
+export const FETCH_BLOGS_SUCCESS = "FETCH_BLOGS_SUCCESS";
+export const ADD_BLOGS_SUCCESS = "ADD_BLOGS_SUCCESS";
+export const ERROR = "ERROR";

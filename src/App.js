@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./App.css";
-import axios from "axios";
+import { fetchBlogs } from "./actions/fetchActions";
 import { BrowserRouter, Route } from "react-router-dom";
 import Home from "./components/home/Home";
 import Popular from "./components/popular/Popular";
@@ -9,33 +10,24 @@ import Detail from "./components/details/Detail";
 import Footer from "./components/footer/footer";
 
 class App extends Component {
-  state = {
-    posts: []
-  };
-
   componentDidMount() {
-    axios
-      .get("http://test.peppersquare.com/api/v1/article")
-      .then(res => {
-        console.log(res.data);
-        this.setState({ posts: res.data });
-      })
-      .catch(err => console.log(err));
+    this.props.fetchBlogs();
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="App">
         <BrowserRouter>
           <div>
             <Route
               path="/"
-              component={() => <Home posts={this.state.posts} />}
+              component={() => <Home posts={this.props.blogs} />}
               exact
             />
             <Route
               path="/popular"
-              component={() => <Popular posts={this.state.posts} exact />}
+              component={() => <Popular posts={this.props.blogs} exact />}
               exact
             />
             <Route path="/add" component={Add} exact />
@@ -48,4 +40,13 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    blogs: state.postReducer.blogs
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchBlogs }
+)(App);
