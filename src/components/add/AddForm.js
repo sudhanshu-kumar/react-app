@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Control } from "react-redux-form";
-import { connect } from 'react-redux'
+import { addBlog } from "../../actions/addAction";
+import { connect } from "react-redux";
 import axios from "axios";
 import "./add.css";
 
@@ -17,8 +18,18 @@ class Add extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  onPublish = post => {
-    console.log(post);
+  handleSubmit({ title, description, tags, author, image }) {
+    console.log();
+        const post = {
+      title: title.value,
+      description: description.value,
+      tags: [tags.value],
+      author: author.value,
+      image: image.value,
+      published: true
+    };
+    this.props.addBlog(post);
+    
 
     // event.preventDefault();
     // const post = {
@@ -43,9 +54,10 @@ class Add extends Component {
     //     alert("Published Success");
     //   })
     //   .catch(err => console.log(err));
-  };
+  }
 
   render() {
+    console.log(this.props)
     return (
       <div>
         <div className="header">
@@ -53,25 +65,19 @@ class Add extends Component {
         </div>
         <Form
           className="form"
-          model="form.postBlog"
-          onSubmit={post => this.onPublish(post)}
+          model="forms"
+          onSubmit={post => this.handleSubmit(post.forms)}
         >
           <Control.text model=".title" placeholder="Title" />
           <Control.textarea model=".description" placeholder="description" />
           <Control.text model=".tags" placeholder="Category / Tags" />
           <Control.text model=".author" placeholder="Author" />
           <Control.text model=".image" placeholder="Image URL Only" />
-          <Control.text type="submit" value="PUBLISH" />
+          <button type="submit">PUBLISH</button>
         </Form>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    blogDetails: state.formData.postBlog
-  }
-}
-
-export default connect(mapStateToProps)(Add);
+export default connect(null, { addBlog })(Add);

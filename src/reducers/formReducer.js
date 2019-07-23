@@ -1,14 +1,15 @@
 import { combineForms } from "react-redux-form";
 
-export const formData = combineForms(
-  {
-    postBlog: {
-      title: "",
-      description: "",
-      tags: "",
-      author: "",
-      image: ""
-    }
-  },
-  "form"
-);
+const initialFormState = {
+  title: "",
+  description: "",
+  tags: "",
+  author: "",
+  image: ""
+};
+
+const forms = combineForms({
+  postBlog: initialFormState
+});
+
+export default forms;

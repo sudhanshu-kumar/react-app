@@ -16,33 +16,38 @@ class App extends Component {
 
   render() {
     console.log(this.props);
-    return (
-      <div className="App">
-        <BrowserRouter>
-          <div>
-            <Route
-              path="/"
-              component={() => <Home posts={this.props.blogs} />}
-              exact
-            />
-            <Route
-              path="/popular"
-              component={() => <Popular posts={this.props.blogs} exact />}
-              exact
-            />
-            <Route path="/add" component={Add} exact />
-            <Route path="/" component={Footer} />
-            <Route path="/detail/:id" component={Detail} exact />
-          </div>
-        </BrowserRouter>
-      </div>
-    );
+    if (!this.props.error) {
+      return (
+        <div className="App">
+          <BrowserRouter>
+            <div>
+              <Route
+                path="/"
+                component={() => <Home posts={this.props.blogs} />}
+                exact
+              />
+              <Route
+                path="/popular"
+                component={() => <Popular posts={this.props.blogs} exact />}
+                exact
+              />
+              <Route path="/add" component={Add} exact />
+              <Route path="/" component={Footer} />
+              <Route path="/detail/:id" component={Detail} exact />
+            </div>
+          </BrowserRouter>
+        </div>
+      );
+    } else {
+      return <h2>Error Occurred: {this.props.error}</h2>
+    }
   }
 }
 
 const mapStateToProps = state => {
   return {
-    blogs: state.postReducer.blogs
+    blogs: state.postReducer.blogs,
+    error: state.postReducer.error
   };
 };
 
