@@ -15,8 +15,8 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props);
-    if (!this.props.error) {
+    console.log(this.props.error);
+    if (this.props.blogs.length) {
       return (
         <div className="App">
           <BrowserRouter>
@@ -39,7 +39,15 @@ class App extends Component {
         </div>
       );
     } else {
-      return <h2>Error Occurred: {this.props.error}</h2>
+      return (
+        <div>
+          {this.props.error ? (
+            <h2>Error: {this.props.error}</h2>
+          ) : (
+            <h2>Loading...</h2>
+          )}
+        </div>
+      );
     }
   }
 }

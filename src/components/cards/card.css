@@ -16,7 +16,7 @@
 }
 
 .card-img-top {
-  object-fit: contain;
+  object-fit: fill;
   width: 100%;
 }
 

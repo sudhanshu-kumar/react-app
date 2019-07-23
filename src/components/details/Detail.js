@@ -39,7 +39,7 @@ class Detail extends Component {
             <h2>Detail</h2>
             <div />
           </div>
-          <div className="card">
+          <div className="detail-card">
             <img className="card-img-top" src={post.image} alt="no-pic" />
             <div className="card-body">
               <h3 className="card-title">{post.title}</h3>
