@@ -8,8 +8,4 @@ const initialFormState = {
   image: ""
 };
 
-const forms = combineForms({
-  postBlog: initialFormState
-});
-
-export default forms;
+export default combineForms({ postBlog: initialFormState }, "forms");

@@ -6,7 +6,7 @@ import "./add.css";
 
 class Add extends Component {
   handleSubmit({ title, description, tags, author, image }) {
-    console.log();
+    console.log(title.value, description.value, tags.value, author.value, image.value);
     const post = {
       title: title.value,
       description: description.value,

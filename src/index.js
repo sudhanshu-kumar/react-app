@@ -1,16 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore, applyMiddleware } from "redux";
-import thunkMiddleware from "redux-thunk";
 import { Provider } from "react-redux";
-import rootReducer from "./reducers/index";
+import store from "./store/Store";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
-
-const middleware = applyMiddleware(thunkMiddleware);
-
-const store = createStore(rootReducer, middleware);
 
 const RootElement = (
   <Provider store={store}>

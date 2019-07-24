@@ -14,10 +14,5 @@ const initialFormState = {
 
 export default combineReducers({
   postReducer,
-  forms: combineForms(
-    {
-      postBlog: initialFormState
-    },
-    "forms"
-  )
+  forms
 });
