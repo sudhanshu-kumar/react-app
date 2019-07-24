@@ -10,7 +10,7 @@ class Add extends Component {
     const post = {
       title: title.value,
       description: description.value,
-      tags: [tags.value],
+      tags: tags.value.split(","),
       author: author.value,
       image: image.value,
       published: true

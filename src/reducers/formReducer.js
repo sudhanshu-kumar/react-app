@@ -3,7 +3,7 @@ import { combineForms } from "react-redux-form";
 const initialFormState = {
   title: "",
   description: "",
-  tags: "",
+  tags: [],
   author: "",
   image: ""
 };
