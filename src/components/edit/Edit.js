@@ -12,6 +12,7 @@ class Edit extends Component {
   };
   handleSubmit({ title, description, tags, author, image }) {
     console.log(
+    parseInt(this.props.match.params.id, 10),
       title.value,
       description.value,
       tags.value,
