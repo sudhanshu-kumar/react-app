@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { ReactComponent as Svg } from "../../index.lava-lamp-preloader.svg";
 import axios from "axios";
+import moment from "moment";
 import "./Detail.css";
 import "../cards/card.css";
 
@@ -50,21 +52,31 @@ class Detail extends Component {
                   })}
                 </h5>
                 <h5 className="date">
-                  {date} {month} {year}
+                  {moment(post.created_at).fromNow()}
+                  {/* {date} {month} {year} */}
                 </h5>
               </div>
               <p className="card-text">{post.description}</p>
               <hr />
               <div className="likes">
-                <i className="material-icons">favorite</i>{" "}
-                <span>{post.likes}</span>
+                <Link to={`/detail/${post.id}/edit`}>Edit</Link>
+                <span>
+                  <i className="material-icons">favorite</i>{" "}
+                  <span>{post.likes}</span>
+                </span>
               </div>
             </div>
           </div>
         </div>
       );
     } else {
-      return <h2>Loading...</h2>;
+      return (
+        <h2>
+          <div className="loading">
+            <Svg className="svg" />
+          </div>
+        </h2>
+      );
     }
   }
 }

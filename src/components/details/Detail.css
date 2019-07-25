@@ -16,3 +16,13 @@
   -moz-box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.75);
 }
+
+.likes {
+  display: flex;
+  justify-content: space-between;
+}
+
+.likes>span {
+  display: flex;
+  
+}

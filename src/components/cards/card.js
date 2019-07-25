@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import moment from "moment";
 import "./card.css";
 
 const Card = ({ post }) => {
@@ -30,7 +31,8 @@ const Card = ({ post }) => {
             </h5>
             <div>
               <h5 className="date">
-                {date} {month} {year}
+                {moment(post.created_at).fromNow()}
+                {/* {date} {month} {year} */}
               </h5>
             </div>
           </div>
