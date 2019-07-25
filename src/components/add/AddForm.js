@@ -18,8 +18,6 @@ class Add extends Component {
     this.props.addBlog(post);
     alert("Added Success");
     this.props.history.push('/');
-
-
   }
 
   render() {

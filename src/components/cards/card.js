@@ -7,7 +7,15 @@ const Card = ({ post }) => {
   const month = new Date(post.created_at).toLocaleString("default", {
     month: "short"
   });
+  console.log(post);
   const year = new Date(post.created_at).getFullYear();
+  const lastIdxOfSpace = post.description
+    .toString()
+    .substring(0, 41)
+    .lastIndexOf(" ");
+  const shortDescription = post.description
+    .toString()
+    .substring(0, lastIdxOfSpace);
   return (
     <Link to={`/detail/${post.id}`} className="link">
       <div className="card">
@@ -20,13 +28,13 @@ const Card = ({ post }) => {
                 return <span key={index}>{tag} </span>;
               })}
             </h5>
-            <h5 className="date">
-              {date} {month} {year}
-            </h5>
+            <div>
+              <h5 className="date">
+                {date} {month} {year}
+              </h5>
+            </div>
           </div>
-          <p className="card-text">
-            {post.description.toString().substring(0, 41)}...
-          </p>
+          <p className="card-text">{shortDescription}...</p>
           <hr />
           <div className="likes">
             <i className="material-icons">favorite</i> <span>{post.likes}</span>
