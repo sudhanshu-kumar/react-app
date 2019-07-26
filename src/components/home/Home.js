@@ -1,4 +1,5 @@
-import React, { lazy, Suspense } from "react";
+// import React, { lazy, Suspense } from "react";
+import React from 'react';
 import "./Home.css";
 import Card from "../cards/card";
 

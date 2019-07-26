@@ -4,12 +4,12 @@ import moment from "moment";
 import "./card.css";
 
 const Card = ({ post }) => {
-  const date = new Date(post.created_at).getDate();
-  const month = new Date(post.created_at).toLocaleString("default", {
-    month: "short"
-  });
-  console.log(post);
-  const year = new Date(post.created_at).getFullYear();
+  // const date = new Date(post.created_at).getDate();
+  // const month = new Date(post.created_at).toLocaleString("default", {
+  //   month: "short"
+  // });
+  // console.log(post);
+  // const year = new Date(post.created_at).getFullYear();
   const lastIdxOfSpace = post.description
     .toString()
     .substring(0, 41)

@@ -27,11 +27,11 @@ class Detail extends Component {
   render() {
     const { post } = this.state;
     if (post !== null) {
-      const date = new Date(post.created_at).getDate();
-      const month = new Date(post.created_at).toLocaleString("default", {
-        month: "short"
-      });
-      const year = new Date(post.created_at).getFullYear();
+      // const date = new Date(post.created_at).getDate();
+      // const month = new Date(post.created_at).toLocaleString("default", {
+      //   month: "short"
+      // });
+      // const year = new Date(post.created_at).getFullYear();
       return (
         <div>
           <div className="detail-head">
