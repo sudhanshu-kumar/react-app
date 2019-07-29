@@ -2,6 +2,7 @@ import * as actionTypes from "../actionTypes/actionTypes";
 
 const initialState = {
   blogs: [],
+  blogDetails: null,
   error: null
 };
 
@@ -12,6 +13,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         blogs: action.payload.blogs
+      };
+    case actionTypes.FETCH_BLOG_DETAILS:
+      return {
+        ...state,
+        blogDetails: action.payload.blogDetails
       };
     case actionTypes.ERROR:
       return {

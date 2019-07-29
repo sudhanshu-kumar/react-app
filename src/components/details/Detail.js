@@ -1,31 +1,18 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 import { ReactComponent as Svg } from "../../index.lava-lamp-preloader.svg";
-import axios from "axios";
+import { fetchBlogDetails } from "../../actions/fetchActions";
 import moment from "moment";
 import "./Detail.css";
 import "../cards/card.css";
 
 class Detail extends Component {
-  state = {
-    post: null
-  };
-
   componentDidMount() {
-    axios
-      .get("http://test.peppersquare.com/api/v1/article")
-      .then(res => {
-        console.log(res.data);
-        const post = res.data.filter(
-          p => p.id === parseInt(this.props.match.params.id, 10)
-        );
-        console.log(post);
-        this.setState({ post: post[0] });
-      })
-      .catch(err => console.log(err));
+    this.props.fetchBlogDetails(this.props.match.params.id);
   }
   render() {
-    const { post } = this.state;
+    const { blogDetails: post } = this.props;
     if (post !== null) {
       // const date = new Date(post.created_at).getDate();
       // const month = new Date(post.created_at).toLocaleString("default", {
@@ -81,4 +68,16 @@ class Detail extends Component {
   }
 }
 
-export default Detail;
+const mapStateToProps = state => {
+  return {
+    blogDetails: state.postReducer.blogDetails,
+    error: state.postReducer.error
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { fetchBlogDetails }
+  )(Detail)
+);

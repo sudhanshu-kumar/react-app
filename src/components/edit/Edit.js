@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { Form, Control } from "react-redux-form";
 import { addBlog } from "../../actions/addAction";
+import { fetchBlogs } from "../../actions/fetchActions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "../add/add.css";
@@ -18,33 +20,34 @@ class Edit extends Component {
   handleSubmit = form => {
     const post = { id: this.props.match.params.id };
     if (!form.hasOwnProperty("title")) {
-      post.title = this.state.title;
+      post.title = this.state.title.trim();
     } else {
-      post.title = form.title.value;
+      post.title = form.title.value.trim();
     }
     if (!form.hasOwnProperty("description")) {
-      post.description = this.state.description;
+      post.description = this.state.description.trim();
     } else {
-      post.description = form.description.value;
+      post.description = form.description.value.trim();
     }
     if (!form.hasOwnProperty("tags")) {
-      post.tags = this.state.tags.split(",");
+      post.tags = this.state.tags.trim().split(",");
     } else {
-      post.tags = form.tags.value.split(",");
+      post.tags = form.tags.value.trim().split(",");
     }
     if (!form.hasOwnProperty("author")) {
-      post.author = this.state.author;
+      post.author = this.state.author.trim();
     } else {
-      post.author = form.author.value;
+      post.author = form.author.value.trim();
     }
     if (!form.hasOwnProperty("image")) {
-      post.image = this.state.image;
+      post.image = this.state.image.trim();
     } else {
-      post.image = form.image.value;
+      post.image = form.image.value.trim();
     }
     console.log(post);
     this.props.addBlog(post);
     alert("Update Success");
+    this.props.fetchBlogs();
     this.props.history.push(`/detail/${this.props.match.params.id}`);
   };
 
@@ -72,7 +75,11 @@ class Edit extends Component {
       return (
         <div>
           <div className="header">
+            <Link to={`/detail/${this.props.match.params.id}`}>
+              <i className="material-icons">arrow_back</i>
+            </Link>
             <h2>Edit</h2>
+            <div />
           </div>
           <Form
             className="form"
@@ -131,6 +138,6 @@ class Edit extends Component {
 export default withRouter(
   connect(
     null,
-    { addBlog }
+    { addBlog, fetchBlogs }
   )(Edit)
 );

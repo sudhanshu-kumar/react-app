@@ -1,22 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
+//import { formatDate } from "../../helpers/dateFormatter";
+import { descriptionShortener } from "../../helpers/shortDescription";
 import "./card.css";
 
 const Card = ({ post }) => {
-  // const date = new Date(post.created_at).getDate();
-  // const month = new Date(post.created_at).toLocaleString("default", {
-  //   month: "short"
-  // });
-  // console.log(post);
-  // const year = new Date(post.created_at).getFullYear();
-  const lastIdxOfSpace = post.description
-    .toString()
-    .substring(0, 41)
-    .lastIndexOf(" ");
-  const shortDescription = post.description
-    .toString()
-    .substring(0, lastIdxOfSpace);
+  //const { date, month, year } = formatDate(post.created_at);
+  const shortDescription = descriptionShortener(post.description);
   return (
     <Link to={`/detail/${post.id}`} className="link">
       <div className="card">
@@ -31,7 +22,7 @@ const Card = ({ post }) => {
             </h5>
             <div>
               <h5 className="date">
-                {moment(post.created_at).fromNow()}
+                {moment(post.created_at).calendar()}
                 {/* {date} {month} {year} */}
               </h5>
             </div>
