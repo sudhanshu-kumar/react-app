@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Form, Control } from "react-redux-form";
+import { Form, Control, Errors } from "react-redux-form";
 import { addBlog } from "../../actions/addAction";
 import { fetchBlogs } from "../../actions/fetchActions";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "../add/add.css";
+
+const required = val => val && val.length
+const minLength = len => val => val && val.length >= len 
 
 class Edit extends Component {
   state = {
@@ -63,7 +66,8 @@ class Edit extends Component {
     this.setState({
       title: post[0].title,
       description: post[0].description,
-      tags: post[0].author,
+      tags: post[0].tags,
+      author: post[0].author,
       image: post[0].image
     });
   }
@@ -92,7 +96,9 @@ class Edit extends Component {
               name="title"
               value={title}
               onChange={this.handleOnChange}
+              validators={{ required, minLength: minLength(3) }}
             />
+            <Errors model=".title" show="touched" messages={{ required: "required", minLength: "must be minimum 3 charcters" }} />
             <Control.textarea
               model=".description"
               placeholder="description"
@@ -100,7 +106,9 @@ class Edit extends Component {
               value={description}
               onChange={this.handleOnChange}
               updateOn="change"
+              validators={{ required, minLength: minLength(3) }}
             />
+            <Errors model=".description" show="touched" messages={{ required: "required", minLength: "must be minimum 3 charcters" }} /> 
             <Control.text
               model=".tags"
               placeholder="Category / Tags"
@@ -108,7 +116,9 @@ class Edit extends Component {
               value={tags}
               onChange={this.handleOnChange}
               updateOn="change"
+              validators={{ required, minLength: minLength(3) }}
             />
+            <Errors model=".tags" show="touched" messages={{ required: "required", minLength: "must be minimum 3 charcters" }} />
             <Control.text
               model=".author"
               placeholder="Author"
@@ -116,7 +126,9 @@ class Edit extends Component {
               value={author}
               onChange={this.handleOnChange}
               updateOn="change"
+              validators={{ required, minLength: minLength(3) }}
             />
+            <Errors model=".author" show="touched" messages={{ required: "required", minLength: "must be minimum 3 charcters" }} />
             <Control.text
               model=".image"
               placeholder="Image URL Only"
@@ -124,7 +136,9 @@ class Edit extends Component {
               value={image}
               onChange={this.handleOnChange}
               updateOn="change"
+              validators={{ required, minLength: minLength(3) }}
             />
+            <Errors model=".image" show="touched" messages={{ required: "required", minLength: "must be minimum 3 charcters" }} />
             <button type="submit">UPDATE</button>
           </Form>
         </div>
