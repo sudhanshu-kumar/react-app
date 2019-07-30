@@ -40,6 +40,7 @@ class Add extends Component {
           className="form"
           model="forms"
           onSubmit={post => this.handleSubmit(post.forms)}
+          validateOn="change"
         >
           <Control.text model=".title" placeholder="Title" validators={{ required, minLength: minLength(3) }} />
           <Errors model=".title" show="touched" messages={{ required: "required ", minLength: "must be minimum 3 characters long" }} />
