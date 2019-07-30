@@ -3,13 +3,10 @@ import { Link } from "react-router-dom";
 import { Form, Control, Errors } from "react-redux-form";
 import { addBlog } from "../../actions/addAction";
 import { fetchBlogs } from "../../actions/fetchActions";
+import { required, minLength, imageURL } from '../../helpers/validators';
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "../add/add.css";
-
-const required = val => val && val.length
-const minLength = len => val => val && val.length >= len 
-
 class Edit extends Component {
   state = {
     post: null,
@@ -89,6 +86,7 @@ class Edit extends Component {
             className="form"
             model="forms"
             onSubmit={post => this.handleSubmit(post.forms)}
+            validateOn="submit"
           >
             <Control.text
               model=".title"
@@ -96,49 +94,56 @@ class Edit extends Component {
               name="title"
               value={title}
               onChange={this.handleOnChange}
+              updateOn="focus"
+              validateOn="focus"
               validators={{ required, minLength: minLength(3) }}
+              defaultValue={title}
             />
-            <Errors model=".title" show="touched" messages={{ required: "required", minLength: "must be minimum 3 charcters" }} />
+            <Errors model=".title" show="touched" messages={{ required: "required, ", minLength: "must be minimum 3 characters" }} />
             <Control.textarea
               model=".description"
               placeholder="description"
               name="description"
               value={description}
               onChange={this.handleOnChange}
-              updateOn="change"
+              updateOn="focus"
+              validateOn="focus"
               validators={{ required, minLength: minLength(3) }}
             />
-            <Errors model=".description" show="touched" messages={{ required: "required", minLength: "must be minimum 3 charcters" }} /> 
+            <Errors model=".description" show="touched" messages={{ required: "required, ", minLength: "must be minimum 3 characters" }} /> 
             <Control.text
               model=".tags"
               placeholder="Category / Tags"
               name="tags"
               value={tags}
               onChange={this.handleOnChange}
-              updateOn="change"
+              updateOn="focus"
+              validateOn="focus"
               validators={{ required, minLength: minLength(3) }}
             />
-            <Errors model=".tags" show="touched" messages={{ required: "required", minLength: "must be minimum 3 charcters" }} />
+            <Errors model=".tags" show="touched" messages={{ required: "required, ", minLength: "must be minimum 3 characters" }} />
             <Control.text
               model=".author"
               placeholder="Author"
               name="author"
               value={author}
               onChange={this.handleOnChange}
-              updateOn="change"
+              updateOn="focus"
+              validateOn="focus"
               validators={{ required, minLength: minLength(3) }}
             />
-            <Errors model=".author" show="touched" messages={{ required: "required", minLength: "must be minimum 3 charcters" }} />
+            <Errors model=".author" show="touched" messages={{ required: "required, ", minLength: "must be minimum 3 characters" }} />
             <Control.text
               model=".image"
               placeholder="Image URL Only"
               name="image"
               value={image}
               onChange={this.handleOnChange}
-              updateOn="change"
-              validators={{ required, minLength: minLength(3) }}
+              updateOn="focus"
+              validateOn="focus"
+              validators={{ required, imageURL }}
             />
-            <Errors model=".image" show="touched" messages={{ required: "required", minLength: "must be minimum 3 charcters" }} />
+            <Errors model=".image" show="touched" messages={{ required: "required, ", imageURL: "invalid image URL" }} />
             <button type="submit">UPDATE</button>
           </Form>
         </div>

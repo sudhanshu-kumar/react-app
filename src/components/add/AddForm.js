@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import { Form, Control, Errors } from "react-redux-form";
 import { addBlog } from "../../actions/addAction";
 import { connect } from "react-redux";
+import { required, minLength, imageURL } from '../../helpers/validators';
 import "./add.css";
-
-const required = val => val && val.length
-const minLength = len => val => val && val.length >= len 
 
 class Add extends Component {
 
@@ -44,15 +42,15 @@ class Add extends Component {
           onSubmit={post => this.handleSubmit(post.forms)}
         >
           <Control.text model=".title" placeholder="Title" validators={{ required, minLength: minLength(3) }} />
-          <Errors model=".title" show="touched" messages={{ required: "required", minLength: "must be minimum 3 charcters" }} />
+          <Errors model=".title" show="touched" messages={{ required: "required ", minLength: "must be minimum 3 characters long" }} />
           <Control.textarea model=".description" placeholder="description" validators={{ required, minLength: minLength(3) }} />
-          <Errors model=".description" show="touched" messages={{ required: "required", minLength: "must be minimum 3 charcters" }} />
+          <Errors model=".description" show="touched" messages={{ required: "required ", minLength: "must be minimum 3 characters long" }} />
           <Control.text model=".tags" placeholder="Category / Tags" validators={{ required, minLength: minLength(3) }} />
-          <Errors model=".tags" show="touched" messages={{ required: "required", minLength: "must be minimum 3 charcters" }} />
+          <Errors model=".tags" show="touched" messages={{ required: "required ", minLength: "must be minimum 3 characters long" }} />
           <Control.text model=".author" placeholder="Author" validators={{ required, minLength: minLength(3) }}/>
-          <Errors model=".author" show="touched" messages={{ required: "required", minLength: "must be minimum 3 charcters" }} />
-          <Control.text model=".image" placeholder="Image URL Only" validators={{ required, minLength: minLength(3) }}/>
-          <Errors model=".image" show="touched" messages={{ required: "required", minLength: "must be minimum 3 charcters" }} />
+          <Errors model=".author" show="touched" messages={{ required: "required ", minLength: "must be minimum 3 characters long" }} />
+          <Control.text model=".image" placeholder="Image URL Only" validators={{ required, imageURL }}/>
+          <Errors model=".image" show="touched" messages={{ required: "required ", imageURL: "invalid image url" }} />
           <button type="submit">PUBLISH</button>
         </Form>
       </div>

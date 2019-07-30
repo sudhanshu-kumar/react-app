@@ -45,7 +45,7 @@ class Detail extends Component {
               </div>
               <p className="card-text">{post.description}</p>
               <hr />
-              <div className="likes">
+              <div className="likes likes-details">
                 <Link to={`/detail/${post.id}/edit`}>Edit</Link>
                 <span>
                   <i className="material-icons">favorite</i>{" "}
