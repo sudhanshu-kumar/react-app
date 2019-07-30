@@ -1,14 +1,19 @@
 import axios from "axios";
+import { apiUrl } from "../helpers/defaultApiUrl";
 import * as actionTypes from "../actionTypes/actionTypes";
 
 export const fetchBlogs = () => {
   return dispatch => {
+    dispatch({
+      type: actionTypes.FETCH_BLOGS,
+      payload: { fetching: true, fetched: false }
+    });
     axios
-      .get("http://test.peppersquare.com/api/v1/article")
+      .get(apiUrl)
       .then(res => {
         dispatch({
           type: actionTypes.FETCH_BLOGS_SUCCESS,
-          payload: { blogs: res.data }
+          payload: { data: res.data, fetching: false, fetched: true }
         });
       })
       .catch(err => {
@@ -19,15 +24,18 @@ export const fetchBlogs = () => {
 
 export const fetchBlogDetails = id => {
   return dispatch => {
+    dispatch({
+      type: actionTypes.FETCH_BLOG_DETAILS,
+      payload: { fetching: true, fetched: false }
+    });
     axios
-      .get("http://test.peppersquare.com/api/v1/article")
+      .get(apiUrl)
       .then(res => {
-        console.log(res.data);
         const post = res.data.filter(p => p.id === parseInt(id, 10));
         console.log(post);
         dispatch({
-          type: actionTypes.FETCH_BLOG_DETAILS,
-          payload: { blogDetails: post[0] }
+          type: actionTypes.FETCH_BLOG_DETAILS_SUCCESS,
+          payload: { data: post[0], fetching: false, fetched: true }
         });
       })
       .catch(err => {

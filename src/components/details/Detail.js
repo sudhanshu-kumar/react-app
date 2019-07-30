@@ -13,7 +13,7 @@ class Detail extends Component {
   }
   render() {
     const { blogDetails: post } = this.props;
-    if (post !== null) {
+    if (this.props.fetched) {
       // const date = new Date(post.created_at).getDate();
       // const month = new Date(post.created_at).toLocaleString("default", {
       //   month: "short"
@@ -70,7 +70,8 @@ class Detail extends Component {
 
 const mapStateToProps = state => {
   return {
-    blogDetails: state.postReducer.blogDetails,
+    blogDetails: state.postReducer.blogDetails.data,
+    fetched: state.postReducer.blogDetails.fetched,
     error: state.postReducer.error
   };
 };

@@ -17,8 +17,7 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props.error);
-    if (this.props.blogs.length) {
+    if (this.props.fetched) {
       return (
         <div className="App">
           <BrowserRouter>
@@ -59,7 +58,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    blogs: state.postReducer.blogs,
+    blogs: state.postReducer.blogs.data,
+    fetched: state.postReducer.blogs.fetched,
     error: state.postReducer.error
   };
 };

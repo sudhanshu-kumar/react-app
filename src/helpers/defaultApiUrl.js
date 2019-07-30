@@ -1,0 +1,1 @@
+export const apiUrl = "http://test.peppersquare.com/api/v1/article";
