@@ -1,4 +1,5 @@
 export const descriptionShortener = description => {
+  if(description && description.split(" ").length === 1) return description.split(" ")
   if (description && description !== "") {
     const lastIdxOfSpace = description
       .toString()
@@ -9,6 +10,6 @@ export const descriptionShortener = description => {
       .substring(0, lastIdxOfSpace);
     return shortDescription;
   } else {
-    return "No Description";
+    return ["No Description"];
   }
 };

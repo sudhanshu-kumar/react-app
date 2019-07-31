@@ -1,12 +1,13 @@
 // import React, { lazy, Suspense } from "react";
-import React from 'react';
+import React from "react";
 import "./Home.css";
 import Card from "../cards/card";
+import { sortByNewAdded } from "../../helpers/shortBlogs";
 
 //const Card = lazy(() => import("../cards/card"));
 
-const Home = ({posts}) => {
-  const newPosts = [...posts].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime() )
+const Home = ({ posts }) => {
+  const newPosts = sortByNewAdded(posts);
   return (
     <div>
       <div className="header">
@@ -16,7 +17,7 @@ const Home = ({posts}) => {
         {newPosts.map((post, index) => {
           return (
             // <Suspense fallback={<div>Loading...</div>}>
-              <Card key={index} post={post} />
+            <Card key={index} post={post} />
             // </Suspense>
           );
         })}

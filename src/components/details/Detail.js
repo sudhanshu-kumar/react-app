@@ -46,7 +46,7 @@ class Detail extends Component {
               <p className="card-text">{post.description}</p>
               <hr />
               <div className="likes likes-details">
-                <Link to={`/detail/${post.id}/edit`}>Edit</Link>
+                <Link to={`/detail/${post.id}/edit`}><button type="submit" className="btn btn-primary">Edit</button></Link>
                 <span>
                   <i className="material-icons">favorite</i>{" "}
                   <span>{post.likes}</span>

@@ -1,9 +1,10 @@
 import React from "react";
 import "../home/Home.css";
 import Card from "../cards/card";
+import { sortByLikes } from "../../helpers/shortBlogs";
 
-const Popular = props => {
-  const sortedPosts = [...props.posts].sort((a, b) => b.likes - a.likes);
+const Popular = ({ posts }) => {
+  const sortedPosts = sortByLikes(posts);
   return (
     <div>
       <div className="header">
