@@ -1,35 +1,24 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { ReactComponent as Svg } from "../../index.lava-lamp-preloader.svg";
+import { fetchBlogDetails } from "../../actions/fetchActions";
+import moment from "moment";
 import "./Detail.css";
 import "../cards/card.css";
 
 class Detail extends Component {
-  state = {
-    post: null
-  };
-
   componentDidMount() {
-    axios
-      .get("http://test.peppersquare.com/api/v1/article")
-      .then(res => {
-        console.log(res.data);
-        const post = res.data.filter(
-          p => p.id === parseInt(this.props.match.params.id, 10)
-        );
-        console.log(post);
-        this.setState({ post: post[0] });
-      })
-      .catch(err => console.log(err));
+    this.props.fetchBlogDetails(this.props.match.params.id);
   }
   render() {
-    const { post } = this.state;
-    if (post !== null) {
-      const date = new Date(post.created_at).getDate();
-      const month = new Date(post.created_at).toLocaleString("default", {
-        month: "short"
-      });
-      const year = new Date(post.created_at).getFullYear();
+    const { blogDetails: post } = this.props;
+    if (this.props.fetched) {
+      // const date = new Date(post.created_at).getDate();
+      // const month = new Date(post.created_at).toLocaleString("default", {
+      //   month: "short"
+      // });
+      // const year = new Date(post.created_at).getFullYear();
       return (
         <div>
           <div className="detail-head">
@@ -39,7 +28,7 @@ class Detail extends Component {
             <h2>Detail</h2>
             <div />
           </div>
-          <div className="card">
+          <div className="detail-card">
             <img className="card-img-top" src={post.image} alt="no-pic" />
             <div className="card-body">
               <h3 className="card-title">{post.title}</h3>
@@ -50,23 +39,46 @@ class Detail extends Component {
                   })}
                 </h5>
                 <h5 className="date">
-                  {date} {month} {year}
+                  {moment(post.created_at).fromNow()}
+                  {/* {date} {month} {year} */}
                 </h5>
               </div>
               <p className="card-text">{post.description}</p>
               <hr />
-              <div className="likes">
-                <i className="material-icons">favorite</i>{" "}
-                <span>{post.likes}</span>
+              <div className="likes likes-details">
+                <Link to={`/detail/${post.id}/edit`}><button type="submit" className="btn btn-primary">Edit</button></Link>
+                <span>
+                  <i className="material-icons">favorite</i>{" "}
+                  <span>{post.likes}</span>
+                </span>
               </div>
             </div>
           </div>
         </div>
       );
     } else {
-      return <h2>Loading...</h2>;
+      return (
+        <h2>
+          <div className="loading">
+            <Svg className="svg" />
+          </div>
+        </h2>
+      );
     }
   }
 }
 
-export default Detail;
+const mapStateToProps = state => {
+  return {
+    blogDetails: state.postReducer.blogDetails.data,
+    fetched: state.postReducer.blogDetails.fetched,
+    error: state.postReducer.error
+  };
+};
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { fetchBlogDetails }
+  )(Detail)
+);

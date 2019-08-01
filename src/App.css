@@ -1,0 +1,9 @@
+.loading {
+  position: fixed;
+  top: 30%;
+  left: 40%;
+}
+.svg {
+  width: 200px;
+  height: 220px;
+}

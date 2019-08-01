@@ -1,51 +1,70 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./App.css";
-import axios from "axios";
+import { fetchBlogs } from "./actions/fetchActions";
 import { BrowserRouter, Route } from "react-router-dom";
+import { ReactComponent as Svg } from "./index.lava-lamp-preloader.svg";
 import Home from "./components/home/Home";
 import Popular from "./components/popular/Popular";
 import Add from "./components/add/AddForm";
 import Detail from "./components/details/Detail";
+import Edit from "./components/edit/Edit";
 import Footer from "./components/footer/footer";
 
 class App extends Component {
-  state = {
-    posts: []
-  };
-
   componentDidMount() {
-    axios
-      .get("http://test.peppersquare.com/api/v1/article")
-      .then(res => {
-        console.log(res.data);
-        this.setState({ posts: res.data });
-      })
-      .catch(err => console.log(err));
+    this.props.fetchBlogs();
   }
 
   render() {
-    return (
-      <div className="App">
-        <BrowserRouter>
-          <div>
-            <Route
-              path="/"
-              component={() => <Home posts={this.state.posts} />}
-              exact
-            />
-            <Route
-              path="/popular"
-              component={() => <Popular posts={this.state.posts} exact />}
-              exact
-            />
-            <Route path="/add" component={Add} exact />
-            <Route path="/" component={Footer} />
-            <Route path="/detail/:id" component={Detail} exact />
-          </div>
-        </BrowserRouter>
-      </div>
-    );
+    if (this.props.fetched) {
+      return (
+        <div className="App">
+          <BrowserRouter>
+            <div>
+              <Route
+                path="/"
+                component={() => <Home posts={this.props.blogs} />}
+                exact
+              />
+              <Route
+                path="/popular"
+                component={() => <Popular posts={this.props.blogs} exact />}
+                exact
+              />
+              <Route path="/add" component={Add} exact />
+              <Route path="/" component={Footer} />
+              <Route path="/detail/:id" component={Detail} exact />
+              <Route path="/detail/:id/edit" component={() => <Edit posts={this.props.blogs} exact />}/>
+            </div>
+          </BrowserRouter>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          {this.props.error ? (
+            <h2>Error: {this.props.error}</h2>
+          ) : (
+            <div className="loading">
+              <Svg className="svg" />
+            </div>
+          )}
+        </div>
+      );
+    }
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    blogs: state.postReducer.blogs.data,
+    fetched: state.postReducer.blogs.fetched,
+    error: state.postReducer.error
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { fetchBlogs }
+)(App);

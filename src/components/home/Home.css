@@ -1,5 +1,6 @@
 .header {
   position: fixed;
+  z-index: 1;
   top: 0;
   width: 100%;
   height: 4em;
@@ -7,6 +8,7 @@
   color: white;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .posts {
@@ -14,4 +16,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 4.4em auto 3.5em auto;
+  max-width: 60%;
 }
