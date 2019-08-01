@@ -9,18 +9,18 @@ class Add extends Component {
 
   handleSubmit({ title, description, tags, author, image }) {
     console.log(
-      title.value,
-      description.value,
-      tags.value,
-      author.value,
-      image.value
+      title,
+      description,
+      tags,
+      author,
+      image
     );
     const post = {
-      title: title.value.trim(),
-      description: description.value.trim(),
-      tags: tags.value.trim().split(","),
-      author: author.value.trim(),
-      image: image.value.trim(),
+      title: title.trim(),
+      description: description.trim(),
+      tags: tags.trim().split(","),
+      author: author.trim(),
+      image: image.trim(),
       published: true
     };
     this.props.addBlog(post);
@@ -29,7 +29,6 @@ class Add extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <div className="header">
@@ -37,20 +36,20 @@ class Add extends Component {
         </div>
         <Form
           className="form"
-          model="forms"
-          onSubmit={post => this.handleSubmit(post.forms)}
+          model="postBlog"
+          onSubmit={post => this.handleSubmit(post)}
           validateOn="change"
         >
-          <Control.text className="form-control" model=".title" placeholder="Title" validators={{ required, minLength: minLength(3) }} />
-          <Errors className="text-danger" model=".title" show="touched" messages={{ required: "required ", minLength: "must be minimum 3 characters long" }} />
-          <Control.textarea className="form-control" model=".description" placeholder="description" validators={{ required, minLength: minLength(3) }} />
-          <Errors className="text-danger" model=".description" show="touched" messages={{ required: "required ", minLength: "must be minimum 3 characters long" }} />
-          <Control.text className="form-control" model=".tags" placeholder="Category / Tags" validators={{ required, minLength: minLength(3) }} />
-          <Errors className="text-danger" model=".tags" show="touched" messages={{ required: "required ", minLength: "must be minimum 3 characters long" }} />
-          <Control.text className="form-control" model=".author" placeholder="Author" validators={{ required, minLength: minLength(3) }}/>
-          <Errors className="text-danger" model=".author" show="touched" messages={{ required: "required ", minLength: "must be minimum 3 characters long" }} />
-          <Control.text className="form-control" model=".image" placeholder="Image URL Only" validators={{ required, imageURL }}/>
-          <Errors className="text-danger" model=".image" show="touched" messages={{ required: "required ", imageURL: "invalid image url" }} />
+          <Control.text className="form-control" id="title" name="title" model=".title" placeholder="Title" validators={{ required, minLength: minLength(3) }} />
+          <Errors className="text-danger" model=".title" show="touched" messages={{ required: "Required ", minLength: "Must be minimum 3 characters long" }} />
+          <Control.textarea className="form-control" id="description" name="description" model=".description" placeholder="description" validators={{ required, minLength: minLength(3) }} />
+          <Errors className="text-danger" model=".description" show="touched" messages={{ required: "Required ", minLength: "Must be minimum 3 characters long" }} />
+          <Control.text className="form-control" id="tags" name="tags" model=".tags" placeholder="Category / Tags" validators={{ required, minLength: minLength(3) }} />
+          <Errors className="text-danger" model=".tags" show="touched" messages={{ required: "Required ", minLength: "Must be minimum 3 characters long" }} />
+          <Control.text className="form-control" id="author" name="author" model=".author" placeholder="Author" validators={{ required, minLength: minLength(3) }}/>
+          <Errors className="text-danger" model=".author" show="touched" messages={{ required: "Required ", minLength: "Must be minimum 3 characters long" }} />
+          <Control.text className="form-control" id="image" name="image" model=".image" placeholder="Image URL Only" validators={{ required, imageURL }}/>
+          <Errors className="text-danger" model=".image" show="touched" messages={{ required: "Required ", imageURL: "Invalid image url" }} />
           <button type="submit" className="btn btn-primary">PUBLISH</button>
         </Form>
       </div>

@@ -4,5 +4,5 @@ import forms from "./formReducer";
 
 export default combineReducers({
   postReducer,
-  forms
+  ...forms
 });

@@ -1,4 +1,4 @@
-import { combineForms } from "react-redux-form";
+import { createForms } from "react-redux-form";
 
 const initialFormState = {
   title: "",
@@ -8,4 +8,4 @@ const initialFormState = {
   image: ""
 };
 
-export default combineForms({ postBlog: initialFormState }, "forms");
+export default createForms({ postBlog: initialFormState });

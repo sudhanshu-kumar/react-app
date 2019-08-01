@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Form, Control, Errors } from "react-redux-form";
 import { addBlog } from "../../actions/addAction";
 import { fetchBlogs } from "../../actions/fetchActions";
-import { required, minLength, imageURL } from '../../helpers/validators';
+import { required, minLength, imageURL } from "../../helpers/validators";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "../add/add.css";
@@ -16,40 +16,39 @@ class Edit extends Component {
     image: ""
   };
 
-  handleSubmit = form => {
-    const post = { id: this.props.match.params.id, published: true };
-    // if (form.hasOwnProperty("title")) {
-      post.title = form.title.value.trim();
-    // } else {
-    //   post.title = this.state.title.trim();
-    // }
-    // if (!form.hasOwnProperty("description")) {
-    //   post.description = this.state.description.trim();
-    // } else {
-      post.description = form.description.value.trim();
-    // }
-    // if (!form.hasOwnProperty("tags")) {
-    //   post.tags = this.state.tags.trim().split(",");
-    // } else {
-      post.tags = form.tags.value.trim().split(",");
-    // }
-    // if (!form.hasOwnProperty("author")) {
-    //   post.author = this.state.author.trim();
-    // } else {
-      post.author = form.author.value.trim();
-    // }
-    // if (!form.hasOwnProperty("image")) {
-    //   post.image = this.state.image.trim();
-    // } else {
-      post.image = form.image.value.trim();
-    // }
-    console.log(post);
-    console.log(this.state.image)
-    this.props.addBlog(post);
-    alert("Update Success");
-    this.props.fetchBlogs();
-    this.props.history.push(`/detail/${this.props.match.params.id}`);
-  };
+  handleSubmit(form) {
+    console.log("form data", form);
+    // const post = { id: this.props.match.params.id, published: true };
+    // // if (form.hasOwnProperty("title")) {
+    // post.title = form.title.value.trim();
+    // // } else {
+    // //   post.title = this.state.title.trim();
+    // // }
+    // // if (!form.hasOwnProperty("description")) {
+    // //   post.description = this.state.description.trim();
+    // // } else {
+    // post.description = form.description.value.trim();
+    // // }
+    // // if (!form.hasOwnProperty("tags")) {
+    // //   post.tags = this.state.tags.trim().split(",");
+    // // } else {
+    // post.tags = form.tags.value.trim().split(",");
+    // // }
+    // // if (!form.hasOwnProperty("author")) {
+    // //   post.author = this.state.author.trim();
+    // // } else {
+    // post.author = form.author.value.trim();
+    // // }
+    // // if (!form.hasOwnProperty("image")) {
+    // //   post.image = this.state.image.trim();
+    // // } else {
+    // post.image = form.image.value.trim();
+    // // }
+    // this.props.addBlog(post);
+    // alert("Update Success");
+    // this.props.fetchBlogs();
+    // this.props.history.push(`/detail/${this.props.match.params.id}`);
+  }
 
   handleOnChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -72,7 +71,7 @@ class Edit extends Component {
   render() {
     if (this.state.title !== null) {
       const { title, description, tags, author, image } = this.state;
-      console.log(this.props);
+      console.log(this.state);
       return (
         <div>
           <div className="header">
@@ -85,8 +84,8 @@ class Edit extends Component {
           <Form
             className="form"
             model="forms"
-            onSubmit={post => console.log(post.forms)}
-            validateOn="submit"
+            onSubmit={post => this.handleSubmit(post.forms)}
+            validateOn="change"
           >
             <Control.text
               className="form-control"
@@ -96,10 +95,16 @@ class Edit extends Component {
               value={title}
               onChange={this.handleOnChange}
               validators={{ required, minLength: minLength(3) }}
-              validateOn="submit"
-              defaultValue={title}
+              required
             />
-            <Errors model=".title" show={(field) => !field.touched && field.focus} messages={{ required: "required, ", minLength: "must be minimum 3 characters" }} />
+            <Errors
+              model=".title"
+              show="touched"
+              messages={{
+                required: "required, ",
+                minLength: "must be minimum 3 characters"
+              }}
+            />
             <Control.textarea
               className="form-control"
               model=".description"
@@ -108,8 +113,16 @@ class Edit extends Component {
               value={description}
               onChange={this.handleOnChange}
               validators={{ required, minLength: minLength(3) }}
+              validateOn="focus"
             />
-            <Errors model=".description" show={(field) => !field.touched && field.focus} messages={{ required: "required, ", minLength: "must be minimum 3 characters" }} /> 
+            <Errors
+              model=".description"
+              show="touched"
+              messages={{
+                required: "required, ",
+                minLength: "must be minimum 3 characters"
+              }}
+            />
             <Control.text
               className="form-control"
               model=".tags"
@@ -118,8 +131,16 @@ class Edit extends Component {
               value={tags}
               onChange={this.handleOnChange}
               validators={{ required, minLength: minLength(3) }}
+              validateOn="focus"
             />
-            <Errors model=".tags" show={(field) => !field.touched && field.focus} messages={{ required: "required, ", minLength: "must be minimum 3 characters" }} />
+            <Errors
+              model=".tags"
+              show="touched"
+              messages={{
+                required: "required, ",
+                minLength: "must be minimum 3 characters"
+              }}
+            />
             <Control.text
               className="form-control"
               model=".author"
@@ -128,8 +149,16 @@ class Edit extends Component {
               value={author}
               onChange={this.handleOnChange}
               validators={{ required, minLength: minLength(3) }}
+              validateOn="focus"
             />
-            <Errors model=".author" show={(field) => !field.touched && field.focus} messages={{ required: "required, ", minLength: "must be minimum 3 characters" }} />
+            <Errors
+              model=".author"
+              show="touched"
+              messages={{
+                required: "required, ",
+                minLength: "must be minimum 3 characters"
+              }}
+            />
             <Control.text
               className="form-control"
               model=".image"
@@ -138,9 +167,19 @@ class Edit extends Component {
               value={image}
               onChange={this.handleOnChange}
               validators={{ required, imageURL }}
+              validateOn="focus"
             />
-            <Errors model=".image" show={(field) => !field.touched && field.focus} messages={{ required: "required, ", imageURL: "invalid image URL" }} />
-            <button className="btn btn-primary" type="submit">UPDATE</button>
+            <Errors
+              model=".image"
+              show="touched"
+              messages={{
+                required: "required, ",
+                imageURL: "invalid image URL"
+              }}
+            />
+            <button type="submit" className="btn btn-primary">
+              UPDATE
+            </button>
           </Form>
         </div>
       );
