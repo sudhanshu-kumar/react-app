@@ -45,6 +45,7 @@ class Edit extends Component {
     post.image = form.image.trim();
     // }
     this.props.addBlog(post);
+    console.log(this.props)
     this.props.resetForm();
     alert("Update Success");
     this.props.fetchBlogs();
