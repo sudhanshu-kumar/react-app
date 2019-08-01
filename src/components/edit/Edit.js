@@ -86,6 +86,7 @@ class Edit extends Component {
             className="form"
             model="postBlog"
             onSubmit={post => this.handleSubmit(post)}
+            validateOn="submit"
           >
             <Control.text
               className="form-control"
