@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Form, Control, Errors } from "react-redux-form";
-import { addBlog } from "../../actions/addAction";
+import { addBlog, resetForm } from "../../actions/addAction";
 import { fetchBlogs } from "../../actions/fetchActions";
 import { required, minLength, imageURL } from "../../helpers/validators";
 import { connect } from "react-redux";
@@ -18,36 +18,37 @@ class Edit extends Component {
 
   handleSubmit(form) {
     console.log("form data", form);
-    // const post = { id: this.props.match.params.id, published: true };
-    // // if (form.hasOwnProperty("title")) {
-    // post.title = form.title.value.trim();
-    // // } else {
-    // //   post.title = this.state.title.trim();
-    // // }
-    // // if (!form.hasOwnProperty("description")) {
-    // //   post.description = this.state.description.trim();
-    // // } else {
-    // post.description = form.description.value.trim();
-    // // }
-    // // if (!form.hasOwnProperty("tags")) {
-    // //   post.tags = this.state.tags.trim().split(",");
-    // // } else {
-    // post.tags = form.tags.value.trim().split(",");
-    // // }
-    // // if (!form.hasOwnProperty("author")) {
-    // //   post.author = this.state.author.trim();
-    // // } else {
-    // post.author = form.author.value.trim();
-    // // }
-    // // if (!form.hasOwnProperty("image")) {
-    // //   post.image = this.state.image.trim();
-    // // } else {
-    // post.image = form.image.value.trim();
-    // // }
-    // this.props.addBlog(post);
-    // alert("Update Success");
-    // this.props.fetchBlogs();
-    // this.props.history.push(`/detail/${this.props.match.params.id}`);
+    const post = { id: this.props.match.params.id, published: true };
+    // if (form.hasOwnProperty("title")) {
+    post.title = form.title.trim();
+    // } else {
+    //   post.title = this.state.title.trim();
+    // }
+    // if (!form.hasOwnProperty("description")) {
+    //   post.description = this.state.description.trim();
+    // } else {
+    post.description = form.description.trim();
+    // }
+    // if (!form.hasOwnProperty("tags")) {
+    //   post.tags = this.state.tags.trim().split(",");
+    // } else {
+    post.tags = form.tags.trim().split(",");
+    // }
+    // if (!form.hasOwnProperty("author")) {
+    //   post.author = this.state.author.trim();
+    // } else {
+    post.author = form.author.trim();
+    // }
+    // if (!form.hasOwnProperty("image")) {
+    //   post.image = this.state.image.trim();
+    // } else {
+    post.image = form.image.trim();
+    // }
+    this.props.addBlog(post);
+    this.props.resetForm();
+    alert("Update Success");
+    this.props.fetchBlogs();
+    this.props.history.push(`/detail/${this.props.match.params.id}`);
   }
 
   handleOnChange = event => {
@@ -83,21 +84,21 @@ class Edit extends Component {
           </div>
           <Form
             className="form"
-            model="forms"
-            onSubmit={post => this.handleSubmit(post.forms)}
-            validateOn="change"
+            model="postBlog"
+            onSubmit={post => this.handleSubmit(post)}
           >
             <Control.text
               className="form-control"
+              id="title"
               model=".title"
               placeholder="Title"
               name="title"
               value={title}
               onChange={this.handleOnChange}
               validators={{ required, minLength: minLength(3) }}
-              required
             />
             <Errors
+              className="text-danger"
               model=".title"
               show="touched"
               messages={{
@@ -113,9 +114,9 @@ class Edit extends Component {
               value={description}
               onChange={this.handleOnChange}
               validators={{ required, minLength: minLength(3) }}
-              validateOn="focus"
             />
             <Errors
+              className="text-danger"
               model=".description"
               show="touched"
               messages={{
@@ -131,9 +132,9 @@ class Edit extends Component {
               value={tags}
               onChange={this.handleOnChange}
               validators={{ required, minLength: minLength(3) }}
-              validateOn="focus"
             />
             <Errors
+              className="text-danger"
               model=".tags"
               show="touched"
               messages={{
@@ -149,9 +150,9 @@ class Edit extends Component {
               value={author}
               onChange={this.handleOnChange}
               validators={{ required, minLength: minLength(3) }}
-              validateOn="focus"
             />
             <Errors
+              className="text-danger"
               model=".author"
               show="touched"
               messages={{
@@ -167,9 +168,9 @@ class Edit extends Component {
               value={image}
               onChange={this.handleOnChange}
               validators={{ required, imageURL }}
-              validateOn="focus"
             />
             <Errors
+              className="text-danger"
               model=".image"
               show="touched"
               messages={{
@@ -192,6 +193,6 @@ class Edit extends Component {
 export default withRouter(
   connect(
     null,
-    { addBlog, fetchBlogs }
+    { addBlog, fetchBlogs, resetForm }
   )(Edit)
 );

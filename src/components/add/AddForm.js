@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Control, Errors } from "react-redux-form";
-import { addBlog } from "../../actions/addAction";
+import { addBlog, resetForm } from "../../actions/addAction";
 import { connect } from "react-redux";
 import { required, minLength, imageURL } from '../../helpers/validators';
 import "./add.css";
@@ -24,6 +24,7 @@ class Add extends Component {
       published: true
     };
     this.props.addBlog(post);
+    this.props.resetForm("postBlog");
     alert("Added Success");
     this.props.history.push("/");
   }
@@ -38,7 +39,6 @@ class Add extends Component {
           className="form"
           model="postBlog"
           onSubmit={post => this.handleSubmit(post)}
-          validateOn="change"
         >
           <Control.text className="form-control" id="title" name="title" model=".title" placeholder="Title" validators={{ required, minLength: minLength(3) }} />
           <Errors className="text-danger" model=".title" show="touched" messages={{ required: "Required ", minLength: "Must be minimum 3 characters long" }} />
@@ -59,5 +59,5 @@ class Add extends Component {
 
 export default connect(
   null,
-  { addBlog }
+  { addBlog, resetForm }
 )(Add);

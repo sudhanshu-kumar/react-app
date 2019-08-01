@@ -1,6 +1,6 @@
 import axios from "axios";
+import { actions } from "react-redux-form";
 import * as actionTypes from "../actionTypes/actionTypes";
-
 import { apiUrl } from "../helpers/defaultApiUrl";
 
 export const addBlog = blog => {
@@ -13,6 +13,7 @@ export const addBlog = blog => {
       .post(apiUrl, blog)
       .then(res => {
         console.log(res.data);
+        
         axios.get(apiUrl).then(response => {
           dispatch({
             type: actionTypes.ADD_BLOGS_SUCCESS,
@@ -25,3 +26,9 @@ export const addBlog = blog => {
       });
   };
 };
+
+export const resetForm = () => {
+  return dispatch => {
+    dispatch(actions.reset("postBlog"));
+  }
+}
