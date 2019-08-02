@@ -11,6 +11,36 @@
   align-items: center;
 }
 
+.search {
+  position: relative;
+}
+
+.title-list {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  max-height: 20em;
+  z-index: 1;
+  background: white;
+  overflow: scroll;
+}
+
+.no-title-list {
+  display: none;
+}
+
+.list-item {
+  list-style: none;
+  z-index: 1;
+  color: black;
+}
+
+.list-item:hover {
+  cursor: pointer;
+  background: black;
+  color: white;
+}
+
 .posts {
   display: flex;
   flex-direction: column;
