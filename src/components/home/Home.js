@@ -77,24 +77,4 @@ class Home extends Component {
   }
 }
 
-// const Home = ({ posts }) => {
-//   const newPosts = sortByNewAdded(posts);
-//   return (
-//     <div>
-//       <div className="header">
-//         <h2>Home</h2>
-//       </div>
-//       <div className="posts">
-//         {newPosts.map((post, index) => {
-//           return (
-//             // <Suspense fallback={<div>Loading...</div>}>
-//             <Card key={index} post={post} />
-//             // </Suspense>
-//           );
-//         })}
-//       </div>
-//     </div>
-//   );
-// };
-
 export default Home;
