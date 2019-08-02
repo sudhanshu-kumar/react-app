@@ -4,46 +4,23 @@ import { Form, Control, Errors } from "react-redux-form";
 import { addBlog, resetForm } from "../../actions/addAction";
 import { fetchBlogs } from "../../actions/fetchActions";
 import { required, minLength, imageURL } from "../../helpers/validators";
+import { initialFormState } from "../../reducers/formReducer"
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "../add/add.css";
 class Edit extends Component {
   state = {
-    title: "",
-    description: "",
-    tags: "",
-    author: "",
-    image: ""
+    loading: false
   };
 
   handleSubmit(form) {
     console.log("form data", form);
     const post = { id: this.props.match.params.id, published: true };
-    // if (form.hasOwnProperty("title")) {
     post.title = form.title.trim();
-    // } else {
-    //   post.title = this.state.title.trim();
-    // }
-    // if (!form.hasOwnProperty("description")) {
-    //   post.description = this.state.description.trim();
-    // } else {
     post.description = form.description.trim();
-    // }
-    // if (!form.hasOwnProperty("tags")) {
-    //   post.tags = this.state.tags.trim().split(",");
-    // } else {
     post.tags = form.tags.trim().split(",");
-    // }
-    // if (!form.hasOwnProperty("author")) {
-    //   post.author = this.state.author.trim();
-    // } else {
     post.author = form.author.trim();
-    // }
-    // if (!form.hasOwnProperty("image")) {
-    //   post.image = this.state.image.trim();
-    // } else {
     post.image = form.image.trim();
-    // }
     this.props.addBlog(post);
     console.log(this.props)
     this.props.resetForm();
@@ -52,27 +29,21 @@ class Edit extends Component {
     this.props.history.push(`/detail/${this.props.match.params.id}`);
   }
 
-  handleOnChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
   componentDidMount() {
     let post = this.props.posts.filter(
       p => p.id === parseInt(this.props.match.params.id, 10)
     );
     console.log(post);
-    this.setState({
-      title: post[0].title,
-      description: post[0].description,
-      tags: post[0].tags,
-      author: post[0].author,
-      image: post[0].image
-    });
+    this.setState({ loading: true })
+    initialFormState.title = post[0].title
+    initialFormState.description = post[0].description
+    initialFormState.tags = post[0].tags.join(",")
+    initialFormState.author = post[0].author
+    initialFormState.image = post[0].image
   }
 
   render() {
-    if (this.state.title !== null) {
-      const { title, description, tags, author, image } = this.state;
+    if (this.state.loading) {
       console.log(this.state);
       return (
         <div>
@@ -95,8 +66,7 @@ class Edit extends Component {
               model=".title"
               placeholder="Title"
               name="title"
-              value={title}
-              onChange={this.handleOnChange}
+              defaultValue={initialFormState.title}
               validators={{ required, minLength: minLength(3) }}
             />
             <Errors
@@ -113,8 +83,7 @@ class Edit extends Component {
               model=".description"
               placeholder="description"
               name="description"
-              value={description}
-              onChange={this.handleOnChange}
+              defaultValue={initialFormState.description}
               validators={{ required, minLength: minLength(3) }}
             />
             <Errors
@@ -131,8 +100,7 @@ class Edit extends Component {
               model=".tags"
               placeholder="Category / Tags"
               name="tags"
-              value={tags}
-              onChange={this.handleOnChange}
+              defaultValue={initialFormState.tags}
               validators={{ required, minLength: minLength(3) }}
             />
             <Errors
@@ -149,8 +117,7 @@ class Edit extends Component {
               model=".author"
               placeholder="Author"
               name="author"
-              value={author}
-              onChange={this.handleOnChange}
+              defaultValue={initialFormState.author}
               validators={{ required, minLength: minLength(3) }}
             />
             <Errors
@@ -167,8 +134,7 @@ class Edit extends Component {
               model=".image"
               placeholder="Image URL Only"
               name="image"
-              value={image}
-              onChange={this.handleOnChange}
+              defaultValue={initialFormState.image}
               validators={{ required, imageURL }}
             />
             <Errors

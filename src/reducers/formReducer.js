@@ -1,9 +1,9 @@
 import { createForms } from "react-redux-form";
 
-const initialFormState = {
+export let initialFormState = {
   title: "",
   description: "",
-  tags: [],
+  tags: "",
   author: "",
   image: ""
 };
