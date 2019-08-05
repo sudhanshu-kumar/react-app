@@ -24,6 +24,10 @@
   z-index: 1;
   background: white;
   overflow-y: auto;
+  border: 1px solid gray;
+  -webkit-box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.75);
 }
 
 .no-title-list {
@@ -33,7 +37,12 @@
 .list-item {
   z-index: 1;
   color: black;
-  border-bottom: 1px solid gray;
+  padding-left: 4px;
+}
+
+.active-title {
+  background: black;
+  color: white;
 }
 
 .list-item:hover {
