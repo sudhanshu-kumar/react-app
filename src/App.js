@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./App.css";
 import { fetchBlogs } from "./actions/fetchActions";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { ReactComponent as Svg } from "./index.lava-lamp-preloader.svg";
 import Home from "./components/home/Home";
 import Popular from "./components/popular/Popular";
@@ -10,6 +10,7 @@ import Add from "./components/add/AddForm";
 import Detail from "./components/details/Detail";
 import Edit from "./components/edit/Edit";
 import Footer from "./components/footer/footer";
+import Error404 from "./components/common/Error404"
 
 class App extends Component {
   componentDidMount() {
@@ -22,6 +23,7 @@ class App extends Component {
         <div className="App">
           <BrowserRouter>
             <div>
+              <Switch>
               <Route
                 path="/"
                 component={() => <Home posts={this.props.blogs} />}
@@ -33,9 +35,12 @@ class App extends Component {
                 exact
               />
               <Route path="/add" component={Add} exact />
-              <Route path="/" component={Footer} />
+              {/* <Route path="/" component={Footer} /> */}
               <Route path="/detail/:id" component={Detail} exact />
               <Route path="/detail/:id/edit" component={() => <Edit posts={this.props.blogs} exact />}/>
+              <Route path="*" component={Error404} />
+              </Switch>
+              <Footer />
             </div>
           </BrowserRouter>
         </div>

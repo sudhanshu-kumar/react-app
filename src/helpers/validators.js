@@ -1,3 +1,3 @@
 export const required = val => val && val.length
 export const minLength = len => val => val && val.length >= len
-export const imageURL = val => val && (/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/gi).test(val)
+export const imageURL = val => val && (/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png|jpeg)/gi).test(val)

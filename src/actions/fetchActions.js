@@ -33,6 +33,7 @@ export const fetchBlogDetails = id => {
       .then(res => {
         const post = res.data.filter(p => p.id === parseInt(id, 10));
         console.log(post);
+        if(post.length > 0)
         dispatch({
           type: actionTypes.FETCH_BLOG_DETAILS_SUCCESS,
           payload: { data: post[0], fetching: false, fetched: true }

@@ -55,14 +55,12 @@ class Home extends Component {
         listOfFilteredTitles: newList,
         newPosts
       });
-    }
-    else if (event.keyCode === 40) {
+    } else if (event.keyCode === 40) {
       if (activeTitle + 1 === listOfFilteredTitles.length) {
         return;
       }
       this.setState({ activeTitle: activeTitle + 1 });
-    }
-    else if (event.keyCode === 38) {
+    } else if (event.keyCode === 38) {
       if (activeTitle === 0) {
         return;
       }
