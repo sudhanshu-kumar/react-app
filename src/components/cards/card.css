@@ -37,6 +37,10 @@
   justify-content: space-between;
 }
 
+.card-tags {
+  background: yellow;
+}
+
 .likes {
   display: flex;
   justify-content: flex-end;
@@ -46,4 +50,23 @@
 
 .date {
   color: gray;
+}
+
+@media only screen and (max-width: 375px) {
+  .card-title {
+    font-size: 15px;
+  }
+
+  .date {
+    font-size: 10px;
+    margin-top: 10px;
+  }
+
+  .card-tags {
+    font-size: 10px;
+  }
+
+  .card-text {
+    font-size: 10px;
+  }
 }

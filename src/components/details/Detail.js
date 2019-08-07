@@ -34,15 +34,15 @@ class Detail extends Component {
             <div className="card-body">
               <h3 className="card-title">{post.title}</h3>
               <div className="card-sub-title">
-                <h5>
+                <div>
                   {post.tags.map((tag, index) => {
-                    return <span key={index}>{tag} </span>;
+                    return <span className="card-tags" key={index}>{tag} </span>;
                   })}
-                </h5>
-                <h5 className="date">
+                </div>
+                <span className="date">
                   {moment(post.created_at).fromNow()}
                   {/* {date} {month} {year} */}
-                </h5>
+                </span>
               </div>
               <p className="card-text">{post.description}</p>
               <hr />

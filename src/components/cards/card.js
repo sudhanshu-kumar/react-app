@@ -13,24 +13,24 @@ const Card = ({ post }) => {
     return (
       <div className="card">
         <Link to={`/detail/${post.id}`} className="link">
-          <div className="author">
-            {post.author}
-          </div>
+          <div className="author">{post.author}</div>
           <img className="card-img-top" src={post.image} alt="no-pic" />
           <div className="card-body">
             <h3 className="card-title">{post.title}</h3>
             <div className="card-sub-title">
-              <h5>
-                {post.tags.map((tag, index) => {
-                  return <span key={index}>{tag} </span>;
-                })}
-              </h5>
               <div>
-                <h5 className="date">
-                  {moment(post.created_at).fromNow()}
-                  {/* {date} {month} {year} */}
-                </h5>
+                {post.tags.map((tag, index) => {
+                  return (
+                    <span className="card-tags" key={index}>
+                      {tag}{" "}
+                    </span>
+                  );
+                })}
               </div>
+              <span className="date">
+                {moment(post.created_at).fromNow()}
+                {/* {date} {month} {year} */}
+              </span>
             </div>
             {shortDescription.length === 1 ? (
               <p className="card-text">{shortDescription}</p>

@@ -59,3 +59,8 @@
   margin: 4.4em auto 3.5em auto;
   max-width: 60%;
 }
+
+.btn {
+  align-self: center;
+  width: 10em;
+}
