@@ -10,7 +10,7 @@ import Add from "./components/add/AddForm";
 import Detail from "./components/details/Detail";
 import Edit from "./components/edit/Edit";
 import Footer from "./components/footer/footer";
-import Error404 from "./components/common/Error404"
+import Error404 from "./components/common/Error404";
 
 class App extends Component {
   componentDidMount() {
@@ -24,21 +24,25 @@ class App extends Component {
           <BrowserRouter>
             <div>
               <Switch>
-              <Route
-                path="/"
-                component={() => <Home posts={this.props.blogs} />}
-                exact
-              />
-              <Route
-                path="/popular"
-                component={() => <Popular posts={this.props.blogs} exact />}
-                exact
-              />
-              <Route path="/add" component={Add} exact />
-              {/* <Route path="/" component={Footer} /> */}
-              <Route path="/detail/:id" component={Detail} exact />
-              <Route path="/detail/:id/edit" component={() => <Edit posts={this.props.blogs} exact />}/>
-              <Route path="*" component={Error404} />
+                <Route
+                  path="/"
+                  component={() => <Home posts={this.props.blogs} />}
+                  exact
+                />
+                <Route
+                  path="/popular"
+                  component={() => <Popular posts={this.props.blogs} />}
+                  exact
+                />
+                <Route path="/add" component={Add} exact />
+                {/* <Route path="/" component={Footer} /> */}
+                <Route path="/detail/:id" component={Detail} exact />
+                <Route
+                  path="/detail/:id/edit"
+                  component={() => <Edit posts={this.props.blogs} />}
+                  exact
+                />
+                <Route path="*" component={Error404} />
               </Switch>
               <Footer />
             </div>

@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Form, Control, Errors } from "react-redux-form";
 import { addBlog, resetForm } from "../../actions/addAction";
+import Error404 from "../common/Error404";
 import { fetchBlogs } from "../../actions/fetchActions";
 import { required, minLength, imageURL } from "../../helpers/validators";
-import { initialFormState } from "../../reducers/formReducer"
+import { initialFormState } from "../../reducers/formReducer";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import "../add/add.css";
 class Edit extends Component {
   state = {
-    loading: false
+    loading: true
   };
 
   handleSubmit(form) {
@@ -22,7 +23,7 @@ class Edit extends Component {
     post.author = form.author.trim();
     post.image = form.image.trim();
     this.props.addBlog(post);
-    console.log(this.props)
+    console.log(this.props);
     this.props.resetForm();
     alert("Update Success");
     this.props.fetchBlogs();
@@ -30,20 +31,28 @@ class Edit extends Component {
   }
 
   componentDidMount() {
-    let post = this.props.posts.filter(
-      p => p.id === parseInt(this.props.match.params.id, 10)
-    );
-    console.log(post);
-    this.setState({ loading: true })
-    initialFormState.title = post[0].title
-    initialFormState.description = post[0].description
-    initialFormState.tags = post[0].tags.join(",")
-    initialFormState.author = post[0].author
-    initialFormState.image = post[0].image
+    console.log(this.props.match.params.id);
+    if (/^[1-9]\d*$/g.test(this.props.match.params.id)) {
+      let post = this.props.posts.filter(
+        p => p.id === parseInt(this.props.match.params.id, 10)
+      );
+      if (post.length < 1) this.setState({ loading: null });
+      if (post.length > 0) {
+        console.log(post);
+        this.setState({ loading: false });
+        initialFormState.title = post[0].title;
+        initialFormState.description = post[0].description;
+        initialFormState.tags = post[0].tags.join(",");
+        initialFormState.author = post[0].author;
+        initialFormState.image = post[0].image;
+      }
+    } else {
+      this.setState({ loading: null })
+    }
   }
 
   render() {
-    if (this.state.loading) {
+    if (this.state.loading === false) {
       console.log(this.state);
       return (
         <div>
@@ -152,8 +161,10 @@ class Edit extends Component {
           </Form>
         </div>
       );
-    } else {
+    } else if (this.state.loading === true) {
       return <h1>Loading...</h1>;
+    } else {
+      return <Error404 />;
     }
   }
 }

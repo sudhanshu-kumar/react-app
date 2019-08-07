@@ -27,7 +27,7 @@ const Card = ({ post }) => {
               </h5>
               <div>
                 <h5 className="date">
-                  {moment(post.created_at).calendar()}
+                  {moment(post.created_at).fromNow()}
                   {/* {date} {month} {year} */}
                 </h5>
               </div>

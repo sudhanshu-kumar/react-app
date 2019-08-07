@@ -12,6 +12,7 @@ const initialState = {
     data: []
   },
   error: null,
+  pageNotFound: false
   
 };
 
@@ -34,6 +35,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         blogDetails: action.payload
       };
+    case actionTypes.ERROR_PAGE:
+      return {
+        ...state,
+        pageNotFound: action.payload.pageNotFound
+      }
     case actionTypes.ERROR:
       return {
         ...state,

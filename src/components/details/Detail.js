@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import Error404 from "../common/Error404";
 import { ReactComponent as Svg } from "../../index.lava-lamp-preloader.svg";
 import { fetchBlogDetails } from "../../actions/fetchActions";
 import moment from "moment";
@@ -46,7 +47,11 @@ class Detail extends Component {
               <p className="card-text">{post.description}</p>
               <hr />
               <div className="likes likes-details">
-                <Link to={`/detail/${post.id}/edit`}><button type="submit" className="btn btn-primary">Edit</button></Link>
+                <Link to={`/detail/${post.id}/edit`}>
+                  <button type="submit" className="btn btn-primary">
+                    Edit
+                  </button>
+                </Link>
                 <span>
                   <i className="material-icons">favorite</i>{" "}
                   <span>{post.likes}</span>
@@ -56,6 +61,8 @@ class Detail extends Component {
           </div>
         </div>
       );
+    } else if (this.props.pageNotFound) {
+      return <Error404 />;
     } else {
       return (
         <h2>
@@ -72,7 +79,8 @@ const mapStateToProps = state => {
   return {
     blogDetails: state.postReducer.blogDetails.data,
     fetched: state.postReducer.blogDetails.fetched,
-    error: state.postReducer.error
+    error: state.postReducer.error,
+    pageNotFound: state.postReducer.pageNotFound
   };
 };
 

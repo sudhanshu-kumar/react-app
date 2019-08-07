@@ -24,6 +24,7 @@ export const fetchBlogs = () => {
 
 export const fetchBlogDetails = id => {
   return dispatch => {
+    
     dispatch({
       type: actionTypes.FETCH_BLOG_DETAILS,
       payload: { fetching: true, fetched: false }
@@ -38,6 +39,12 @@ export const fetchBlogDetails = id => {
           type: actionTypes.FETCH_BLOG_DETAILS_SUCCESS,
           payload: { data: post[0], fetching: false, fetched: true }
         });
+        else {
+          dispatch({
+            type: actionTypes.ERROR_PAGE,
+            payload: { pageNotFound: true }
+          })
+        }
       })
       .catch(err => {
         dispatch({ type: actionTypes.ERROR, payload: { err } });
