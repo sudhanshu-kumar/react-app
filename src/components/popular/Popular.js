@@ -10,22 +10,27 @@ class Popular extends React.Component {
   };
 
   componentDidMount() {
-    const blogs = this.props.posts.slice(0, 6);
-    this.setState({ blogs, noOfBlogs: 6 });
+    const blogs = this.props.posts.slice(0, 10);
+    this.setState({ blogs, noOfBlogs: 10 });
   }
 
   handleLoadMore = () => {
-    const blogs = this.props.posts.slice(
-      this.state.noOfBlogs,
-      this.state.noOfBlogs + 6
-    );
-    this.setState({
-      blogs: [...this.state.blogs, ...blogs],
-      noOfBlogs: this.state.noOfBlogs + 6
-    });
+    const { noOfBlogs } = this.state;
+    const { posts } = this.props;
+    const totalLength = posts.length;
+    if (noOfBlogs <= totalLength) {
+      const lastPostIndex =
+        noOfBlogs + 10 > totalLength ? totalLength : noOfBlogs + 10;
+      const blogs = posts.slice(noOfBlogs, lastPostIndex);
+      this.setState({
+        blogs: [...this.state.blogs, ...blogs],
+        noOfBlogs: lastPostIndex
+      });
+    }
   };
   render() {
     const sortedPosts = sortByLikes(this.state.blogs);
+    console.log("state",this.state.noOfBlogs, "props", this.props.posts.length)
     return (
       <div>
         <div className="header">
@@ -35,9 +40,11 @@ class Popular extends React.Component {
           {sortedPosts.map((post, index) => {
             return <Card key={index} post={post} />;
           })}
-          <button className="btn btn-primary" onClick={this.handleLoadMore}>
-            Load More...
-          </button>
+          {this.state.noOfBlogs < this.props.posts.length ? (
+            <button className="btn btn-primary" onClick={this.handleLoadMore}>
+              Load More...
+            </button>
+          ) : null}
         </div>
       </div>
     );
