@@ -2,6 +2,7 @@ import React from "react";
 import "../home/Home.css";
 import Card from "../cards/card";
 import { sortByLikes } from "../../helpers/shortBlogs";
+import SearchBar from "../searchBar/SearchBar";
 
 class Popular extends React.Component {
   state = {
@@ -12,6 +13,10 @@ class Popular extends React.Component {
   componentDidMount() {
     const blogs = this.props.posts.slice(0, 10);
     this.setState({ blogs, noOfBlogs: 10 });
+  }
+
+  updateBlogsOnSearch = (updatedBlogs) => {
+    this.setState({ blogs: updatedBlogs })
   }
 
   handleLoadMore = () => {
@@ -35,6 +40,7 @@ class Popular extends React.Component {
       <div>
         <div className="header">
           <h2>Popular</h2>
+          <SearchBar posts={this.props.posts} updateBlogs={this.updateBlogsOnSearch} />
         </div>
         <div className="posts">
           {sortedPosts.map((post, index) => {
