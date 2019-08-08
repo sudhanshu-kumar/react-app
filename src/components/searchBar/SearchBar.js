@@ -22,7 +22,7 @@ class SearchBar extends Component {
         filteredBlogs.length < newPosts.length ? getTitles(filteredBlogs) : [];
       newPosts = sortByNewAdded(filteredBlogs);
     }
-    this.props.updateBlogs(newPosts);
+    this.props.updateBlogs(newPosts, event.target.value);
     this.setState({
       search: event.target.value,
       listOfFilteredTitles
@@ -40,7 +40,7 @@ class SearchBar extends Component {
       if (newPosts.length > 1) {
         newList = getTitles(newPosts);
       }
-      this.props.updateBlogs(newPosts);
+      this.props.updateBlogs(newPosts, listOfFilteredTitles[activeTitle]);
       this.setState({
         activeTitle: 0,
         search: listOfFilteredTitles[activeTitle],
@@ -68,7 +68,7 @@ class SearchBar extends Component {
     if (newPosts.length > 1) {
       listOfFilteredTitles = getTitles(newPosts);
     }
-    this.props.updateBlogs(newPosts);
+    this.props.updateBlogs(newPosts, event.target.innerText);
     this.setState({
       search: event.target.innerText,
       listOfFilteredTitles
@@ -90,7 +90,7 @@ class SearchBar extends Component {
           onChange={this.handleSearch}
           onKeyDown={this.handleKeyDown}
         />
-        <div className={listClass} onBlur={e => console.log(e)}>
+        <div className={listClass}>
           {listOfFilteredTitles.length !== 0
             ? listOfFilteredTitles.map((title, index) => {
                 let className = "list-item";

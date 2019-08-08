@@ -6,6 +6,7 @@ import SearchBar from "../searchBar/SearchBar";
 
 class Popular extends React.Component {
   state = {
+    searching: false,
     blogs: [],
     noOfBlogs: 0
   };
@@ -15,13 +16,15 @@ class Popular extends React.Component {
     this.setState({ blogs, noOfBlogs: 10 });
   }
 
-  updateBlogsOnSearch = (updatedBlogs) => {
-    this.setState({ blogs: updatedBlogs })
-  }
+  updateBlogsOnSearch = (updatedBlogs, searchText) => {
+    if (searchText.length > 0)
+      this.setState({ blogs: updatedBlogs, searching: true });
+    else this.setState({ blogs: updatedBlogs, searching: false });
+  };
 
   handleLoadMore = () => {
     const { noOfBlogs } = this.state;
-    const { posts } = this.props;
+    const posts = this.state.searching ? this.state.blogs : this.props.posts;
     const totalLength = posts.length;
     if (noOfBlogs <= totalLength) {
       const lastPostIndex =
@@ -35,18 +38,26 @@ class Popular extends React.Component {
   };
   render() {
     const sortedPosts = sortByLikes(this.state.blogs);
-    console.log("state",this.state.noOfBlogs, "props", this.props.posts.length)
+    console.log(
+      "state",
+      this.state.noOfBlogs,
+      "props",
+      this.props.posts.length
+    );
     return (
       <div>
         <div className="header">
           <h2>Popular</h2>
-          <SearchBar posts={this.props.posts} updateBlogs={this.updateBlogsOnSearch} />
+          <SearchBar
+            posts={this.props.posts}
+            updateBlogs={this.updateBlogsOnSearch}
+          />
         </div>
         <div className="posts">
           {sortedPosts.map((post, index) => {
             return <Card key={index} post={post} />;
           })}
-          {this.state.noOfBlogs < this.props.posts.length ? (
+          {this.state.noOfBlogs < (this.state.searching ? this.state.blogs.length : this.props.posts.length) ? (
             <button className="btn btn-primary" onClick={this.handleLoadMore}>
               Load More...
             </button>
