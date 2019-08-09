@@ -36,7 +36,11 @@ class Detail extends Component {
               <div className="card-sub-title">
                 <div>
                   {post.tags.map((tag, index) => {
-                    return <span className="card-tags" key={index}>{tag} </span>;
+                    return (
+                      <span className="card-tags" key={index}>
+                        {tag}{" "}
+                      </span>
+                    );
                   })}
                 </div>
                 <span className="date">

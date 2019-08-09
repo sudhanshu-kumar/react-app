@@ -24,7 +24,6 @@ export const fetchBlogs = () => {
 
 export const fetchBlogDetails = id => {
   return dispatch => {
-    
     dispatch({
       type: actionTypes.FETCH_BLOG_DETAILS,
       payload: { fetching: true, fetched: false }
@@ -33,17 +32,16 @@ export const fetchBlogDetails = id => {
       .get(apiUrl)
       .then(res => {
         const post = res.data.filter(p => p.id === parseInt(id, 10));
-        console.log(post);
-        if(post.length > 0)
-        dispatch({
-          type: actionTypes.FETCH_BLOG_DETAILS_SUCCESS,
-          payload: { data: post[0], fetching: false, fetched: true }
-        });
+        if (post.length > 0)
+          dispatch({
+            type: actionTypes.FETCH_BLOG_DETAILS_SUCCESS,
+            payload: { data: post[0], fetching: false, fetched: true }
+          });
         else {
           dispatch({
             type: actionTypes.ERROR_PAGE,
             payload: { pageNotFound: true }
-          })
+          });
         }
       })
       .catch(err => {

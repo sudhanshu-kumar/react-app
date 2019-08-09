@@ -12,7 +12,6 @@ class SearchBar extends Component {
   };
 
   handleSearch = event => {
-    console.log(event.target);
     let searchString = event.target.value;
     let listOfFilteredTitles = [];
     let newPosts = sortByNewAdded(this.props.posts);
@@ -31,7 +30,6 @@ class SearchBar extends Component {
 
   handleKeyDown = event => {
     const { activeTitle, listOfFilteredTitles } = this.state;
-    console.log(event.keyCode);
     let newList = [];
     if (event.keyCode === 13) {
       let newPosts = sortByNewAdded(
@@ -60,7 +58,6 @@ class SearchBar extends Component {
   };
 
   onClickListItem = event => {
-    console.log(event.target);
     let listOfFilteredTitles = [];
     let newPosts = sortByNewAdded(
       searchBlogs(this.props.posts, event.target.innerText)

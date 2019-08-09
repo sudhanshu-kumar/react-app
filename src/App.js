@@ -35,7 +35,6 @@ class App extends Component {
                   exact
                 />
                 <Route path="/add" component={Add} exact />
-                {/* <Route path="/" component={Footer} /> */}
                 <Route path="/detail/:id" component={Detail} exact />
                 <Route
                   path="/detail/:id/edit"

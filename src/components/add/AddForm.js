@@ -2,19 +2,11 @@ import React, { Component } from "react";
 import { Form, Control, Errors } from "react-redux-form";
 import { addBlog, resetForm } from "../../actions/addAction";
 import { connect } from "react-redux";
-import { required, minLength, imageURL } from '../../helpers/validators';
+import { required, minLength, imageURL } from "../../helpers/validators";
 import "./add.css";
 
 class Add extends Component {
-
   handleSubmit({ title, description, tags, author, image }) {
-    console.log(
-      title,
-      description,
-      tags,
-      author,
-      image
-    );
     const post = {
       title: title.trim(),
       description: description.trim(),
@@ -40,17 +32,96 @@ class Add extends Component {
           model="postBlog"
           onSubmit={post => this.handleSubmit(post)}
         >
-          <Control.text className="form-control" id="title" name="title" model=".title" placeholder="Title" defaultValue="" validators={{ required, minLength: minLength(3) }} />
-          <Errors className="text-danger" model=".title" show="touched" messages={{ required: "Required, ", minLength: "Must be minimum 3 characters long" }} />
-          <Control.textarea className="form-control" id="description" name="description" model=".description" defaultValue="" placeholder="description" validators={{ required, minLength: minLength(3) }} />
-          <Errors className="text-danger" model=".description" show="touched" messages={{ required: "Required, ", minLength: "Must be minimum 3 characters long" }} />
-          <Control.text className="form-control" id="tags" name="tags" model=".tags" placeholder="Category / Tags" defaultValue="" validators={{ required, minLength: minLength(3) }} />
-          <Errors className="text-danger" model=".tags" show="touched" messages={{ required: "Required, ", minLength: "Must be minimum 3 characters long" }} />
-          <Control.text className="form-control" id="author" name="author" model=".author" placeholder="Author" defaultValue="" validators={{ required, minLength: minLength(3) }}/>
-          <Errors className="text-danger" model=".author" show="touched" messages={{ required: "Required, ", minLength: "Must be minimum 3 characters long" }} />
-          <Control.text className="form-control" id="image" name="image" model=".image" placeholder="Image URL Only" defaultValue="" validators={{ required, imageURL }}/>
-          <Errors className="text-danger" model=".image" show="touched" messages={{ required: "Required, ", imageURL: "Invalid image url" }} />
-          <button type="submit" className="btn btn-primary">PUBLISH</button>
+          <Control.text
+            className="form-control"
+            id="title"
+            name="title"
+            model=".title"
+            placeholder="Title"
+            defaultValue=""
+            validators={{ required, minLength: minLength(3) }}
+          />
+          <Errors
+            className="text-danger"
+            model=".title"
+            show="touched"
+            messages={{
+              required: "Required, ",
+              minLength: "Must be minimum 3 characters long"
+            }}
+          />
+          <Control.textarea
+            className="form-control"
+            id="description"
+            name="description"
+            model=".description"
+            defaultValue=""
+            placeholder="description"
+            validators={{ required, minLength: minLength(3) }}
+          />
+          <Errors
+            className="text-danger"
+            model=".description"
+            show="touched"
+            messages={{
+              required: "Required, ",
+              minLength: "Must be minimum 3 characters long"
+            }}
+          />
+          <Control.text
+            className="form-control"
+            id="tags"
+            name="tags"
+            model=".tags"
+            placeholder="Category / Tags"
+            defaultValue=""
+            validators={{ required, minLength: minLength(3) }}
+          />
+          <Errors
+            className="text-danger"
+            model=".tags"
+            show="touched"
+            messages={{
+              required: "Required, ",
+              minLength: "Must be minimum 3 characters long"
+            }}
+          />
+          <Control.text
+            className="form-control"
+            id="author"
+            name="author"
+            model=".author"
+            placeholder="Author"
+            defaultValue=""
+            validators={{ required, minLength: minLength(3) }}
+          />
+          <Errors
+            className="text-danger"
+            model=".author"
+            show="touched"
+            messages={{
+              required: "Required, ",
+              minLength: "Must be minimum 3 characters long"
+            }}
+          />
+          <Control.text
+            className="form-control"
+            id="image"
+            name="image"
+            model=".image"
+            placeholder="Image URL Only"
+            defaultValue=""
+            validators={{ required, imageURL }}
+          />
+          <Errors
+            className="text-danger"
+            model=".image"
+            show="touched"
+            messages={{ required: "Required, ", imageURL: "Invalid image url" }}
+          />
+          <button type="submit" className="btn btn-primary">
+            PUBLISH
+          </button>
         </Form>
       </div>
     );

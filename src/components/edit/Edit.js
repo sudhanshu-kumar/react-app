@@ -23,7 +23,6 @@ class Edit extends Component {
     post.author = form.author.trim();
     post.image = form.image.trim();
     this.props.addBlog(post);
-    console.log(this.props);
     this.props.resetForm();
     alert("Update Success");
     this.props.fetchBlogs();
@@ -31,14 +30,12 @@ class Edit extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.match.params.id);
     if (/^[1-9]\d*$/g.test(this.props.match.params.id)) {
       let post = this.props.posts.filter(
         p => p.id === parseInt(this.props.match.params.id, 10)
       );
       if (post.length < 1) this.setState({ loading: null });
       if (post.length > 0) {
-        console.log(post);
         this.setState({ loading: false });
         initialFormState.title = post[0].title;
         initialFormState.description = post[0].description;
@@ -53,7 +50,6 @@ class Edit extends Component {
 
   render() {
     if (this.state.loading === false) {
-      console.log(this.state);
       return (
         <div>
           <div className="header">

@@ -13,15 +13,10 @@
 .foot i {
   margin-top: 0.1em;
   font-size: 40px;
-  color: gray;
 }
 
 .foot i:hover {
   margin-top: 0.1em;
   font-size: 40px;
-  color: cadetblue;
-}
-
-.foot .active {
   color: cadetblue;
 }

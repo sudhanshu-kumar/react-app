@@ -13,7 +13,6 @@ const initialState = {
   },
   error: null,
   pageNotFound: false
-  
 };
 
 const reducer = (state = initialState, action) => {
@@ -22,7 +21,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         blogs: action.payload
-      }
+      };
     case actionTypes.FETCH_BLOGS_SUCCESS:
     case actionTypes.ADD_BLOGS_SUCCESS:
       return {
@@ -39,7 +38,7 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         pageNotFound: action.payload.pageNotFound
-      }
+      };
     case actionTypes.ERROR:
       return {
         ...state,

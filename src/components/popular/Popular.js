@@ -38,12 +38,6 @@ class Popular extends React.Component {
   };
   render() {
     const sortedPosts = sortByLikes(this.state.blogs);
-    console.log(
-      "state",
-      this.state.noOfBlogs,
-      "props",
-      this.props.posts.length
-    );
     return (
       <div>
         <div className="header">
@@ -57,7 +51,10 @@ class Popular extends React.Component {
           {sortedPosts.map((post, index) => {
             return <Card key={index} post={post} />;
           })}
-          {this.state.noOfBlogs < (this.state.searching ? this.state.blogs.length : this.props.posts.length) ? (
+          {this.state.noOfBlogs <
+          (this.state.searching
+            ? this.state.blogs.length
+            : this.props.posts.length) ? (
             <button className="btn btn-primary" onClick={this.handleLoadMore}>
               Load More...
             </button>
