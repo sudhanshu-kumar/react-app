@@ -31,7 +31,7 @@ class SearchBar extends Component {
   handleKeyDown = event => {
     const { activeTitle, listOfFilteredTitles } = this.state;
     let newList = [];
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && listOfFilteredTitles.length > 0) {
       let newPosts = sortByNewAdded(
         searchBlogs(this.props.posts, listOfFilteredTitles[activeTitle])
       );
@@ -45,11 +45,17 @@ class SearchBar extends Component {
         listOfFilteredTitles: newList
       });
     } else if (event.keyCode === 40) {
+      let listElement = document.getElementById(this.state.activeTitle - 8);
+      if (listElement !== null && listOfFilteredTitles.length > 10)
+        listElement.scrollIntoView();
       if (activeTitle + 1 === listOfFilteredTitles.length) {
         return;
       }
       this.setState({ activeTitle: activeTitle + 1 });
     } else if (event.keyCode === 38) {
+      let listElement = document.getElementById(this.state.activeTitle - 1);
+      if (listElement !== null && listOfFilteredTitles.length > 10)
+        listElement.scrollIntoView();
       if (activeTitle === 0) {
         return;
       }
@@ -96,6 +102,7 @@ class SearchBar extends Component {
                 }
                 return (
                   <div
+                    id={index}
                     key={index}
                     onClick={this.onClickListItem}
                     className={className}
